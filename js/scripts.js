@@ -3,6 +3,7 @@ const minutesEl = document.querySelector("#minutes");
 const secondsEl = document.querySelector("#seconds");
 const millisecondsEl = document.querySelector("#milliseconds");
 const startBtn = document.querySelector("#startBtn");
+const audio = new Audio("audio/tiro.WAV");
 const pauseBtn = document.querySelector("#pauseBtn");
 const resumeBtn = document.querySelector("#resumeBtn");
 const resetBtn = document.querySelector("#resetBtn");
@@ -19,6 +20,10 @@ startBtn.addEventListener("click", startTimer);
 pauseBtn.addEventListener("click", pauseTime);
 resumeBtn.addEventListener("click", resumeTimer);
 resetBtn.addEventListener("click", resetTimer);
+startBtn.addEventListener("click", () => {
+  audio.play();
+  startTimer();
+});
 
 // Função para iniciar o temporizador
 function startTimer() {
@@ -82,9 +87,13 @@ function resetTimer() {
   millisecondsEl.textContent = "000";
 
   // Altera o estilo dos botões
-  startBtn.style.display = "block";
-  pauseBtn.style.display = "none";
+  startBtn.style.display = "none";
+  pauseBtn.style.display = "block";
   resumeBtn.style.display = "none";
+  resetBtn.style.display = "block"; // oculta o botão reset
+
+  // exibe o botão de pausa
+  pauseBtn.style.display = "block";
 }
 
 // Função para formatar o tempo em minutos e segundos
@@ -96,4 +105,3 @@ function formatTime(time) {
 function formatMilliseconds(time) {
   return time < 100 ? `${time}`.padStart(3, "0") : time;
 }
-
